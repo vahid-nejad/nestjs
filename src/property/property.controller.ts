@@ -22,19 +22,22 @@ import {
 } from './dto/createPropertyZod.dto';
 import { HeadersDto } from './dto/headers.dto';
 import { RequestHeader } from './pipes/request-header';
+import { PropertyService } from './property.service';
 
 @Controller('property')
 export class PropertyController {
+  constructor(private propertyService: PropertyService) {
+    // Don't create your dependecy, instead use DI in NestJS
+    // this.propertyService = new PropertyService();
+  }
+
   @Get()
   findAll() {
-    return 'All Properties';
+    return this.propertyService.findAll();
   }
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id, @Query('sort', ParseBoolPipe) sort) {
-    console.log(typeof id);
-    console.log(typeof sort);
-
-    return id;
+    return this.propertyService.findOne();
   }
 
   @Post()
@@ -45,7 +48,7 @@ export class PropertyController {
     @Body()
     body: CreatePropertyZodDto,
   ) {
-    return body;
+    return this.propertyService.create();
   }
 
   @Patch(':id')
@@ -53,9 +56,8 @@ export class PropertyController {
     @Param('id', ParseIdPipe) id,
     @Body()
     body: CreatePropertyDto,
-    @RequestHeader(new ValidationPipe({ validateCustomDecorators: true }))
-    header: HeadersDto,
+    @Headers('host') header,
   ) {
-    return header;
+    return this.propertyService.update();
   }
 }

@@ -1,6 +1,8 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { PropertyController } from './property.controller';
 import { APP_PIPE } from '@nestjs/core';
+import { PropertyService } from './property.service';
+
 
 @Module({
   controllers: [PropertyController],
@@ -16,6 +18,7 @@ import { APP_PIPE } from '@nestjs/core';
         },
       }),
     },
+    PropertyService,
   ],
 })
 export class PropertyModule {}
