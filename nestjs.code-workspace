@@ -5,6 +5,10 @@
 		}
 	],
 	"settings": {
-		"editor.hover.enabled": false
+		"editor.hover.enabled": false,
+		"prettier.printWidth": 120,
+		"window.zoomLevel": 2,
+"editor.wordWrap": "on",
+"editor.wordWrapColumn": 80
 	}
 }
