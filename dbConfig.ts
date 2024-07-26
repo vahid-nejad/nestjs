@@ -7,5 +7,6 @@ export const pgConfig: PostgresConnectionOptions = {
   type: 'postgres',
   port: 3306,
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
+
   synchronize: true,
 };
