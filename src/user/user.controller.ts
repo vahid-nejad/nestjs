@@ -17,6 +17,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 import { Role } from 'src/auth/enums/role.enum';
 import { Roles } from 'src/auth/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
+import { SessionAuthGuard } from 'src/auth/guards/session-auth/session-auth.guard';
 
 @Roles(Role.USER)
 @Controller('user')
@@ -28,7 +29,8 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
+  @UseGuards(SessionAuthGuard)
   @Get('profile')
   getProfile(@Req() req) {
     return this.userService.findOne(req.user.id);

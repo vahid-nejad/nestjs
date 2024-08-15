@@ -16,6 +16,8 @@ import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from './guards/roles/roles.guard';
 import googleOauthConfig from './config/google-oauth.config';
 import { GoogleStrategy } from './strategies/google.strategy';
+import { SessionAuthGuard } from './guards/session-auth/session-auth.guard';
+import { SessionSerializer } from './session.serializer';
 
 @Module({
   imports: [
@@ -33,14 +35,16 @@ import { GoogleStrategy } from './strategies/google.strategy';
     JwtStrategy,
     RefreshJwtStrategy,
     GoogleStrategy,
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard, //@UseGuards(JwtAuthGuard) applied on all API endppints
-    },
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    },
+    SessionSerializer,
+    // {
+    //   provide: APP_GUARD,
+    //   // useClass: JwtAuthGuard,
+    //   useClass: SessionAuthGuard, //@UseGuards(JwtAuthGuard) applied on all API endppints
+    // },
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: RolesGuard,
+    // },
   ],
 })
 export class AuthModule {}
