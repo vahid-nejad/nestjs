@@ -16,6 +16,7 @@ import { RefreshAuthGuard } from './guards/refresh-auth/refresh-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { Public } from './decorators/public.decorator';
 import { GoogleAuthGuard } from './guards/google-auth/google-auth.guard';
+import { SessionAuthGuard } from './guards/session-auth/session-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -28,7 +29,7 @@ export class AuthController {
     return { msg: 'Login Successfull' };
   }
 
-  @
+  @UseGuards(SessionAuthGuard)
   @Post('signout')
   signOut(@Req() req, @Res() res) {
     // this.authService.signOut(req.user.id);
