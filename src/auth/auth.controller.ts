@@ -16,13 +16,14 @@ import { RefreshAuthGuard } from './guards/refresh-auth/refresh-auth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { Public } from './decorators/public.decorator';
 import { GoogleAuthGuard } from './guards/google-auth/google-auth.guard';
+import { LoginRequestTransformGuard } from './guards/login-request-transform.guard/login-request.tranfsorm.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Public()
   @HttpCode(HttpStatus.OK)
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(LoginRequestTransformGuard())
   @Post('login')
   async login(@Request() req) {
     return this.authService.login(req.user.id);
